@@ -5,7 +5,7 @@
 const getFirstNames = arr => {
   const userFirstNames = [];
   for (let user of arr) {
-    // Your code goes here ...
+    userFirstNames.push(user.firstName);
   }
 };
 
@@ -18,7 +18,10 @@ getFirstNames(usersArray);
 // ***************************************************************************
 
 const getFullNames = arr => {
-  // Your code goes here ...
+  const userFullNames = [];
+  for (let user of arr) {
+    userFullNames.push(`${user.firstName} ${user.lastName}`);
+  }
 };
 
 getFullNames(usersArray);
@@ -31,7 +34,15 @@ getFullNames(usersArray);
 // ***************************************************************************
 
 const getUsersCreditDetails = arr => {
-  // Your code goes here ...
+  for (let user in arr) {
+    const { firstName, lastName, balance } = user;
+    const userDetails = {
+      firstName, 
+      lastName,
+      balance
+    }
+    getUsersCreditDetails.push(userDetails);
+  }
 };
 
 getUsersCreditDetails(usersArray);
@@ -49,7 +60,15 @@ getUsersCreditDetails(usersArray);
 // ***************************************************************************
 
 const genderView = users => {
-  // Your code goes here ...
+  const femaleUsers = users
+    .filter(user => user.gender === 'female')
+    .map(user => `${user.firstName} ${user.lastName}`);
+
+  const maleUsers = users
+    .filter(user => user.gender === 'male')
+    .map(user => `${user.firstName} ${user.lastName}`);
+
+  return { femaleUsers, maleUsers };
 };
 
 genderView(usersArray);
@@ -66,7 +85,10 @@ genderView(usersArray);
 const data = genderView(usersArray);
 
 const genderCount = data => {
-  // Your code goes here ...
+  const { femaleUsers, maleUsers } = data;
+
+  console.log(`Female: ${femaleUsers.length}`);
+  console.log(`Male: ${maleUsers.length}`);
 };
 
 genderCount(data);
@@ -79,7 +101,9 @@ genderCount(data);
 // ***************************************************************************
 
 const promo20 = users => {
-  // Your code goes here ...
+  users
+    .filter(user => parseFloat(user.balance.slice(1).split(',').join('')) > 20000)
+    .forEach(user => console.log(`Dear ${user.firstName}, since your balance is ${user.balance}, you are elegible to apply for this awesome credit card.`));
 };
 
 // expected output:
@@ -91,7 +115,9 @@ const promo20 = users => {
 // ***************************************************************************
 
 const addActive = users => {
-  // Your code goes here ...
+  users.forEach(user => {
+    user.isActive = true;
+  });
 };
 
 addActive(usersArray);
